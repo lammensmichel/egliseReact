@@ -1,11 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { getListPersonnes, getPersonne } from './actions/personnesAction';
 
-const mapStateToProps = state => ({
-  personnes: state.personnes.persones,
-  selectedPersone: state.personnes.selectedPersone,
-});
+import React from 'react';
+import Header from './route/header';
+import Main from './route/main';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -14,14 +11,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(getListPersonnes());
-    this.props.dispatch(getPersonne());
+
   }
 
   render() {
-    console.log('propos: ', this.props.selectedPersone);
-    return <div>salut</div>;
+    return <div><Header /><Main /></div>;
   }
 }
 
-export default connect(mapStateToProps)(App);
+export default App;

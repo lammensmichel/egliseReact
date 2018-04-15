@@ -2,7 +2,7 @@ const URL = 'https://boiling-stream-65489.herokuapp.com/';
 
 export function getListPersonnes() {
   return {
-    type: 'HTTP',
+    type: 'HTTP_GET',
     payload: {
       url: `${URL}personne`,
       action: 'GET_PERSONNES',

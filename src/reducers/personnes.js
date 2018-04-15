@@ -2,15 +2,17 @@ export default function reducer(state = {
   persones: [],
   selectedPersone: {},
 }, action) {
+  let newState;
   switch (action.type) {
     case 'GET_PERSONNES':
-      state = { ...state, persones: action.payload };
+      newState = { ...state, persones: action.payload };
       break;
     case 'GET_PERSONNE':
-      state = { ...state, selectedPersone: action.payload };
+      newState = { ...state, selectedPersone: action.payload };
       break;
     default:
+      newState = state;
       break;
   }
-  return state;
+  return newState;
 }
