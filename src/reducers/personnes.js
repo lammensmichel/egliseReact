@@ -7,7 +7,7 @@ export default function reducer(state = {
     case 'GET_PERSONNES':
       newState = { ...state, persones: action.payload };
       break;
-    case 'GET_PERSONNE':
+    case 'SELECT_PERSONNE':
       newState = { ...state, selectedPersone: action.payload };
       break;
     default:

@@ -2,9 +2,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { getListPersonnes, getPersonne } from '../actions/personnesAction';
+import { getListPersonnes, selectPersonne } from '../actions/personnesAction';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table'
 import moment from 'moment';
+import { Redirect } from 'react-router';
 
 @connect(store => (
   {
@@ -29,16 +30,25 @@ class personneList extends React.Component {
     return moment(cell).format("DD-MM-YYYY" );
   }
 
+  onRowDoubleClick(row){
+    this.props.dispatch(getListPersonnes());
+  }
+
   render() {
-    const { persones } = this.props;
+    const { persones,selectedPersone } = this.props;
     let listpersonne = [];
     if (persones) {
       listpersonne = persones;
     }
 
     const options = {
-      
+      onRowDoubleClick: this.onRowDoubleClick
     };
+  
+
+  if( selectedPersone.nom ) {
+    return ( <Redirect to="/page2"/>)
+  }
 
  return (
     <BootstrapTable

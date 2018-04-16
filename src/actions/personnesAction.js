@@ -10,9 +10,9 @@ export function getListPersonnes() {
   };
 }
 
-export function getPersonne() {
+export function selectPersonne(personne) {
   return {
-    type: 'GET_PERSONNE',
-    payload: { name: 'michel', prenom: 'mimi' },
+    type: 'SELECT_PERSONNE',
+    payload: personne,
   };
 }
