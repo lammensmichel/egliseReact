@@ -19,10 +19,12 @@ class personneList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    //this.onRowDoubleClick= this.onRowDoubleClick.bind(this);
   }
 
   componentDidMount() {
     const { dispatch } = this.props;
+    dispatch(selectPersonne({}));
     dispatch(getListPersonnes());
   }
 
@@ -30,8 +32,8 @@ class personneList extends React.Component {
     return moment(cell).format("DD-MM-YYYY" );
   }
 
-  onRowDoubleClick(row){
-    this.props.dispatch(getListPersonnes());
+  onRowDoubleClick = (row) => {
+    this.props.dispatch(selectPersonne(row));
   }
 
   render() {
@@ -47,23 +49,22 @@ class personneList extends React.Component {
   
 
   if( selectedPersone.nom ) {
-    return ( <Redirect to="/page2"/>)
+    return ( <Redirect to="/personne"/>)
   }
 
- return (
-    <BootstrapTable
-      data={ listpersonne }
-      search={ true }
-      multiColumnSearch={ true }
-      options={ options }
-      keyField='_id'
-      insertRow
-      pagination>
-      <TableHeaderColumn width='35%' dataField='nom'>nom</TableHeaderColumn>
-      <TableHeaderColumn width='35%' dataField='prenom'>prenom</TableHeaderColumn>
-      <TableHeaderColumn width='35%' dataFormat={ this.dateFormatter }  dataField='dateDeNaissance'>date De Naissance</TableHeaderColumn>
-    </BootstrapTable>
-);
+  return (
+      <BootstrapTable
+        data={ listpersonne }
+        search={ true }
+        multiColumnSearch={ true }
+        options={ options }
+        keyField='_id'
+        pagination>
+        <TableHeaderColumn width='35%' dataField='nom'>nom</TableHeaderColumn>
+        <TableHeaderColumn width='35%' dataField='prenom'>prenom</TableHeaderColumn>
+        <TableHeaderColumn width='35%' dataFormat={ this.dateFormatter }  dataField='dateDeNaissance'>date De Naissance</TableHeaderColumn>
+      </BootstrapTable>
+  );
 
   }
 

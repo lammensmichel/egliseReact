@@ -18,8 +18,38 @@ const pingEpic = action$ =>
         })
         .catch(e => console.log('error', e)));
 
+const post = action$ =>
+  action$.ofType('HTTP_POST')
+    .debounceTime(500)
+    .switchMap(action =>
+      Observable.ajax.post(
+        action.payload.url,
+        action.payload.object,
+      )
+        .map((a) => {
+          console.log(a);
+          return { type: action.payload.action, payload: a.response };
+        })
+        .catch(e => console.log('error', e)));
+
+const put = action$ =>
+  action$.ofType('HTTP_PUT')
+    .debounceTime(500)
+    .switchMap(action =>
+      Observable.ajax.put(
+        action.payload.url,
+        action.payload.object,
+      )
+        .map((a) => {
+          console.log(a);
+          return { type: action.payload.action, payload: a.response };
+        })
+        .catch(e => console.log('error', e)));
+
 
 const epicMiddleware = createEpicMiddleware(pingEpic);
-const middleware = applyMiddleware(logger, epicMiddleware);
+const postMidelWare = createEpicMiddleware(post);
+const putMidelWare = createEpicMiddleware(put);
+const middleware = applyMiddleware(logger, epicMiddleware, postMidelWare, putMidelWare);
 
 export default createStore(reducers, middleware);
