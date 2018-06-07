@@ -1,5 +1,5 @@
 /* eslint-disable */
-const URL = 'https://boiling-stream-65489.herokuapp.com/';
+const URL = 'https://node-eglise.herokuapp.com/';
 //const URL = 'http://localhost:3000/';
 
 export function getListPersonnes() {
